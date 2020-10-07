@@ -45,7 +45,7 @@ public class Bird : MonoBehaviour
             //Hancurkan gameObject setelah 2 detik
             //Jika kecepatannya sudah dikurangi dari batas minimum
             _flagDestroy = true;
-            StartCoroutine(DestroyAfter(2));
+            StartCoroutine(DestroyAfter(0.5f));
         }
     }
 
@@ -78,6 +78,14 @@ public class Bird : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         _state = BirdState.HitSomething;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Obstacle")
+        {
+            Debug.Log(collision.gameObject.name);
+        }
     }
 
     public virtual void OnTap()
